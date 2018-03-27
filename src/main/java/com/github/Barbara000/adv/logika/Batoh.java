@@ -13,7 +13,8 @@ import static com.github.Barbara000.adv.util.Texts.*;
  * @version 2017-05-09
  */
 
-class Batoh {
+public class Batoh 
+{
     private static final int KAPACITA = 3;
     private final Map<String, Vec> seznamVeci;   // seznam věcí v batohu
 
@@ -36,6 +37,13 @@ class Batoh {
         }
         return tNEUSPESNE_VLOZENI;
     }
+
+    public Map<String, Vec> getSeznamVeci() {
+        return seznamVeci;
+    }
+    
+    
+    
 
     /**
      * Vrací řetězec názvů věcí, které jsou v batohu
@@ -68,6 +76,8 @@ class Batoh {
         return nalezenaVec;
     }
 
+    
+    
 }
 
 

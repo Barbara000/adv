@@ -15,6 +15,7 @@ public class Vec {
     //== Datové atributy (statické i instancí)======================================
     private String nazev;
     private String popis;
+    private String obrazek;
 
     //== Konstruktory a tovární metody =============================================
 
@@ -25,10 +26,11 @@ public class Vec {
      * @param popis        popis věci
      * @param prenositelna zda je věc přenositelná
      */
-    public Vec(String nazev, String popis, boolean prenositelna) {
+    public Vec(String nazev, String popis, boolean prenositelna,String obrazek) {
         this.nazev = nazev;
         this.popis = popis;
         this.prenositelna = prenositelna;
+        this.obrazek = obrazek;
     }
 
     /**
@@ -104,4 +106,10 @@ public class Vec {
         result = 31 * result + (popis != null ? popis.hashCode() : 0);
         return result;
     }
+
+    public String getObrazek() {
+        return obrazek;
+    }
+    
+    
 }

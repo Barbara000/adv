@@ -1,5 +1,7 @@
 package com.github.Barbara000.adv.logika;
 
+
+import java.util.Observable;
 import static com.github.Barbara000.adv.util.Texts.*;
 
 /**
@@ -13,15 +15,16 @@ import static com.github.Barbara000.adv.util.Texts.*;
  * @author Barbara Štruplová
  * @version 2017-05-09
  */
-public class HerniPlan {
+public class HerniPlan extends Observable{
 
     private Prostor aktualniProstor;
-
+    private Hra hra;
     /**
      * Konstruktor který vytváří jednotlivé prostory a propojuje je pomocí východů.
      * Jako výchozí aktuální prostor nastaví halu.
      */
-    public HerniPlan() {
+    public HerniPlan(Hra hra) {
+        this.hra = hra;
         zalozProstoryHry();
 
     }
@@ -32,13 +35,13 @@ public class HerniPlan {
      */
     private void zalozProstoryHry() {
         // vytvářejí se jednotlivé prostory
-        Prostor pokoj = new Prostor(POKOJ, pPOKOJ);
-        Prostor chodba = new Prostor(CHODBA, pCHODBA);
-        Prostor sklad = new Prostor(SKLAD, pSKLAD);
-        Prostor soused = new Prostor(SOUSED, pSOUSED);
-        Prostor vysetrovna = new Prostor(VYSETROVNA, pVYSETROVNA);
-        Prostor sesterna = new Prostor(SESTERNA, pSESTERNA);
-        Prostor schody = new Prostor(SCHODY, pSCHODY);
+        Prostor pokoj = new Prostor(POKOJ, pPOKOJ,80,0);
+        Prostor chodba = new Prostor(CHODBA, pCHODBA,80,100);
+        Prostor sklad = new Prostor(SKLAD, pSKLAD,0,100);
+        Prostor soused = new Prostor(SOUSED, pSOUSED,150,50);
+        Prostor vysetrovna = new Prostor(VYSETROVNA, pVYSETROVNA,150,140);
+        Prostor sesterna = new Prostor(SESTERNA, pSESTERNA,230,140);
+        Prostor schody = new Prostor(SCHODY, pSCHODY,80,200);
 
 
         // přiřazují se průchody mezi prostory (sousedící prostory)
@@ -56,12 +59,12 @@ public class HerniPlan {
 
 
         // umístíme věci do světa
-        pokoj.vlozVec(new Vec(SUSENKA, pSUSENKA, true));
-        soused.vlozVec(new Vec(PRITEL, pPRITEL, false));
-        sklad.vlozVec(new Vec(SVICKA, pSVICKA, true));
-        sklad.vlozVec(new Vec(SKRIN, pSKRIN, false));
-        vysetrovna.vlozVec(new Vec(OBLECENI, pOBLECENI, true));
-        schody.vlozVec(new Vec(VRATNY, pVRATNY, false));
+        pokoj.vlozVec(new Vec(SUSENKA, pSUSENKA, true,"susenka.jpg"));
+        soused.vlozVec(new Vec(PRITEL, pPRITEL, false,"pritel.jpg"));
+        sklad.vlozVec(new Vec(SVICKA, pSVICKA, true,"svicka.jpg"));
+        sklad.vlozVec(new Vec(SKRIN, pSKRIN, false,"skrin.jpg"));
+        vysetrovna.vlozVec(new Vec(OBLECENI, pOBLECENI, true,"obleceni.jpg"));
+        schody.vlozVec(new Vec(VRATNY, pVRATNY, false,"vratny.jpg"));
 
 
         aktualniProstor = pokoj;  // hra začíná ve tvém pokoji
@@ -86,5 +89,14 @@ public class HerniPlan {
         aktualniProstor = prostor;
     }
 
+    public Hra getHra() {
+        return hra;
+    }
 
+    @Override
+    public void notifyObservers(){
+        setChanged();
+        super.notifyObservers();
+    }
+    
 }

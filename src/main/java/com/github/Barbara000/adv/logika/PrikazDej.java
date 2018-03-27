@@ -58,7 +58,7 @@ public class PrikazDej implements IPrikaz {
             case PRITEL:
                 if (vecBatoh.getNazev().equals(SUSENKA)) {
                     batoh.vyberVec(SUSENKA, true);
-                    batoh.vlozVec(new Vec(LIH, pLIH, true));
+                    batoh.vlozVec(new Vec(LIH, pLIH, true,"lih.jpg"));
                     plan.getAktualniProstor().vyberVec(PRITEL, false).setPopis(pPRITEL2);
                     return tDOSTAL_LIH;
                 } else {
@@ -67,7 +67,7 @@ public class PrikazDej implements IPrikaz {
             case VRATNY:
                 if (vecBatoh.getNazev().equals(LIH)) {
                     batoh.vyberVec(LIH, true);
-                    plan.getAktualniProstor().setVychod(new Prostor(KONEC, pKONEC));
+                    plan.getAktualniProstor().setVychod(new Prostor(KONEC, pKONEC,80,280));
                     plan.getAktualniProstor().vyberVec(VRATNY, false).setPopis(pVRATNY2);
                     return tVYCHOD;
                 } else {

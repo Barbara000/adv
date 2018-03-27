@@ -42,13 +42,23 @@ public class PrikazSeber implements IPrikaz {
         String jmenoVeci = parametry[0];
 
         // vybereme věc
-        Vec vec = plan.getAktualniProstor().vyberVec(jmenoVeci, false);
+        Vec vec = plan.getAktualniProstor().vyberVec(jmenoVeci, true); // bylo false
 
         if (vec == null) {
             return tVEC_TU_NENI;
-        } else {
+        } else 
+        {
             // uložíme věc do batohu
-            return (vec.isPrenositelna() ? batoh.vlozVec(vec) : tNEMOHU_VZIT);
+            if(vec.isPrenositelna())
+            {
+                 batoh.vlozVec(vec);
+                 return tUSPESNE_VLOZENI;
+            }
+            else
+            {
+                plan.getAktualniProstor().vlozVec(vec);
+                return tNEMOHU_VZIT;
+            }
         }
     }
 
